@@ -10,13 +10,16 @@ contours=$2
 if [ -z $map ]; then map=map.osm ; fi
 if [ -z $contours ]; then contours=contours.osm ; fi
 
-rm -rf ~/.config/QLandkarteGT/
+if [ ! -f $map ] ; then echo missing $map ; exit 1 ; fi
+if [ ! -f $contours ] ; then echo missing $contours ; exit 1 ; fi
+rm -rvf ~/.config/QLandkarteGT/
 
-rm *.img *.mdx *.tdb
-ls -l
+rm -v *.img *.mdx *.tdb
+ls -lh
 mkgmap="java -Xmx4024m -Xms128m -ea -jar $HOME/opt/mkgmap-r2643/mkgmap.jar"
 
 $mkgmap --tdbfile --gmapsupp --index \
+  --remove-short-arcs \
   --style-file=OSM/hiking_styles --add-pois-to-areas \
   --overview-mapname=ofm_bnl --family-id=10010 \
   --product-id=1 --family-name=cycle \
