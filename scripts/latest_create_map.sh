@@ -13,6 +13,7 @@
 # time env name=Ganges      top=44.1408 left=3.3192 bottom=43.6937 right=4.0814 ./scripts/latest_create_map.sh
 # time env name=Aubenas     top=44.903  left=3.873  bottom=44.222  right=4.768  ./scripts/latest_create_map.sh
 # time env name=Montpellier top=44.0    left=3.3948 bottom=43.3452 right=4.0869 ./scripts/latest_create_map.sh
+# time env name=Geneva      top=46.898  left=5.251  bottom=45.959  right=6.372  ./scripts/latest_create_map.sh
 
 map="/export/data/OSM/france-latest.osm.pbf"
 contours="/export/data/OSM/srtm_france_sud_est.osm"
@@ -29,7 +30,7 @@ echo "Checking map area for $name:"
 ruby -e "p (($top-$bottom)*($left-$right)).abs"
 
 echo "Clean up"
-rm -v *.img 
+rm -v *.img *.tdb *.mdx
 rm -rvf ~/.config/QLandkarteGT/
 
 echo "Reduce the main OSM map to map.osm..."
@@ -48,6 +49,7 @@ time $mkgmap --max-jobs=3 --gmapsupp --style-file=hiking_styles \
   map.osm 10010.TYP --family-id=10011 --product-id=1 \
   --family-name="$name"contours --draw-priority=30 --transparent \
   contours.osm 10011.TYP --tdbfile
+[ $? -ne 0 ] && exit 1
 
 ls -lh gmap*img
 cp gmapsupp.img gmapsupp-$name-$top-$left-$bottom-$right.img
