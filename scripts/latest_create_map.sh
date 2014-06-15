@@ -7,8 +7,6 @@
 # Other used coordinates are
 #
 # Montpellier, Sete, Ganges  name=Montpellier top=44.0    left=3.3948 bottom=43.3452 right=4.0869
-# Geneva                     name=Geneva      top=46.898  left=5.251  bottom=45.959  right=6.372
-# Aubenas                    name=Aubenas     top=44.903  left=3.873  bottom=44.222  right=4.768
 #
 # time env name=Ganges      top=44.1408 left=3.3192 bottom=43.6937 right=4.0814 ./scripts/latest_create_map.sh
 # time env name=Aubenas     top=44.903  left=3.873  bottom=44.222  right=4.768  ./scripts/latest_create_map.sh
